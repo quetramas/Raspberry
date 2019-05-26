@@ -1,19 +1,26 @@
 booleana=0
 while [[ $boleana -eq 0 ]]; do
   clear
-  echo "1.- Persistencia de conexion ssh"
+  echo "        __^__                                      __^__  "
+  echo "       ( ___ )------------------------------------( ___ ) "
+  echo -e "        | / |             \e[1;32m\e[5m¿Qué tramas?\e[25m\e[0m             | \ |"
+  echo "        | / |                                      | \ |  "
+  echo -e "        |___|   \e[5m Instalación automática \e[25m    |___|"
+  echo "       (_____)------------------------------------(_____) "
   echo
-  echo "2.- Instalar PiHole"
+  echo -e "1.- Persistencia de conexion ssh"
   echo
-  echo "3.- Instalar Ntop y Suricata"
+  echo -e "2.- Instalar PiHole"
   echo
-  echo "4.- Reiniciar"
+  echo -e "3.- Instalar Ntop y Suricata"
   echo
-  echo "5.- Bastionar Raspberry Pi"
+  echo -e "4.- Reiniciar"
   echo
-  echo "6.- Instalar Samba y Apache con Php"
+  echo -e "5.- Bastionar Raspberry Pi"
   echo
-  echo "7.- Salir"
+  echo -e "6.- Instalar Samba y Apache con Php"
+  echo
+  echo -e "\e[1;31m7.- Salir\e[0m"
   echo
   echo -e -n "Elige una opcion: "
   read opcion
@@ -25,9 +32,9 @@ while [[ $boleana -eq 0 ]]; do
        if [ $? -eq 0 ]; then
          sudo -k systemctl start ssh >> errores.txt
        else
-         echo "Ha ocurrido algún error, comprobar errores.txt"
+         echo -e "\e[1;31mHa ocurrido algún error, comprobar el archivo errores.txt\e[0m"
          echo
-         read -p "Enter para continuar..."
+         echo -n -e "\e[1;34mEnter para continuar...\e[0m"
        fi
        #Comprobar
       continue;;
@@ -39,14 +46,14 @@ while [[ $boleana -eq 0 ]]; do
        git clone --depth 1 https://github.com/pi-hole/pi-hole.git Pi-hole >> errores.txt
        if [ $? -eq 0 ]; then
          clear
-         echo "El primer paso se ha completado correctamente"
+         echo -e "\e[1;32mEl primer paso se ha completado correctamente\e[0m"
          sleep 1.5
          clear
          cd "Pi-hole/automated install/"
          sudo bash basic-install.sh >> errores.txt
        else
          clear
-         echo "Puede que la herramienta git no esté instalada correctamente, comprobarla"
+         echo -e "\e[1;31mPuede que la herramienta git no esté instalada correctamente, comprobarla\e[0m"
          sleep 1.5
        fi
       continue;;
@@ -58,27 +65,27 @@ while [[ $boleana -eq 0 ]]; do
        clear
        if [ $? -eq 0 ]; then
          sleep 1.5
-         echo "Ntop se ha instalado correctamente"
+         echo -e "\e[1;32mNtop se ha instalado correctamente\e[0m"
          clear
          sudo /etc/init.d/ntop start >> errores.txt
          if [ $? -eq 0 ]; then
-           echo "El servicio se ha iniciado correctamente"
+           echo -e "\e[1;32mEl servicio se ha iniciado correctamente\e[0m"
            sleep 1.5
            clear
            echo "Comprobando el servicio..."
            sudo netstat -tulpn | grep :3000 >> errores.txt
-           sleep 2
+           sleep 1.5
          else
            clear
-           echo "Ha ocurrido algún error, comprobar errores.txt"
+           echo -e "\e[1;31mHa ocurrido algún error, comprobar errores.txt\e[0m"
            echo
-           read -p "Enter para continuar..."
+           echo -n -e "\e[1;34mEnter para continuar...\e[0m"
          fi
        else
          clear
-         echo "Ha ocurrido algún error, comprobar errores.txt"
+         echo -e "\e[1;31mHa ocurrido algún error, comprobar errores.txt\e[0m"
          echo
-         read -p "Enter para continuar..."
+         echo -n -e "\e[1;34mEnter para continuar...\e[0m"
          sleep 1.5
        fi
        clear
@@ -89,18 +96,18 @@ while [[ $boleana -eq 0 ]]; do
        sudo apt-get install wget build-essential libpcre3-dev libpcre3-dbg automake autoconf libtool libpcap-dev libnet1-dev libyaml-dev zlib1g-dev libcap-ng-dev libjansson-dev >> errores.txt
        if [ $? -eq 0 ]; then
          clear
-         echo "Las dependencias se han instalado correctamente"
+         echo -e "\e[1;32mLas dependencias se han instalado correctamente\e[0m"
          wget http://www.openinfosecfoundation.org/download/suricata-4.1.4.tar.gz >> errores.txt
          if [ $? -eq 0 ]; then
            clear
-           echo "El comando wget se ha ejecutado correctamente"
+           echo -e "\e[1;32mEl comando wget se ha ejecutado correctamente\e[0m"
            sleep 1.5
            clear
            echo "Desccomrpimiento y desempaquetando el paquete"
            tar -xvf suricata-4.1.4.tar.gz >>
            if [ $? -eq 0 ]; then
              clear
-             echo "Se ha descomprimido y desempaquetado correctamente"
+             echo -e "\e[1;32mSe ha descomprimido y desempaquetado correctamente\e[0m"
              sleep 1.5
              clear
              echo "Configurando..."
@@ -108,19 +115,19 @@ while [[ $boleana -eq 0 ]]; do
              ./configure --sysconfdir=/etc --localstatedir=/var >> errores.txt
              if [ $? -eq 0 ]; then
                clear
-               echo "Se ha configurado correctamente"
+               echo -e "\e[1;32mSe ha configurado correctamente\e[0m"
                sleep 1.5
                clear
                echo "Compilando..."
                make
                if [ $? -eq 0 ]; then
                  clear
-                 echo "Se ha completado correctamente"
+                 echo -e "\e[1;32mSe ha completado correctamente\e[0m"
                  sleep 1.5
                  clear
                  sudo make install >> errores.txt
                  if [ $? -eq 0 ]; then
-                   echo "Se ha completado todo correctamente"
+                   echo -e "\e[1;32mSe ha completado todo correctamente\e[0m"
                    clear
                    echo "instalando archivos de configuracion..."
                    sudo make install-conf >> errores.txt
@@ -129,49 +136,49 @@ while [[ $boleana -eq 0 ]]; do
                      sleep 1.5
                      sudo make install-rules >> errores.txt
                      if [ $? -eq 0 ]; then
-                       echo "Se ha instalado todo correctamente"
+                       echo -e "\e[1;32mSe ha instalado todo correctamente\e[0m"
                        sleep 1.5
                      else
                        clear
-                       echo "Ha ocurrido algun error, comprobar errores.txt"ç
+                       echo -e "\e[1;31mHa ocurrido algun error, comprobar errores.txt\e[0m"
                        echo
-                       read -p "Enter para continuar..."
+                       echo -n -e "\e[1;34mEnter para continuar...\e[0m"
                      fi
                    else
                      clear
-                     echo "Ha ocurrido algun error, comprobar errores.txt"
+                     echo -e "\e[1;31mHa ocurrido algun error, comprobar errores.txt\e[0m"
                      echo
-                     read -p "Enter para continuar..."
+                     echo -n -e "\e[1;34mEnter para continuar...\e[0m"
                    fi
                  else
                    clear
-                   echo "Ha ocurrido algun error, comprobar errores.txt"
+                   echo -e "\e[1;31mHa ocurrido algun error, comprobar errores.txt\e[0m"
                    echo
-                   read -p "Enter para continuar..."
+                   echo -n -e "\e[1;34mEnter para continuar...\e[0m"
                  fi
                else
                  clear
-                 echo "No se ha completado correctamente, comprobar errores.txt"
+                 echo -e "\e[1;31mNo se ha completado correctamente, comprobar errores.txt\e[0m"
                  echo
-                 read -p "Enter para continuar..."
+                 echo -n -e "\e[1;34mEnter para continuar...\e[0m"
                fi
              else
                clear
-               echo "No se ha configurado correctamente, comprobar errores.txt"
+               echo -e "\e[1;31mNo se ha configurado correctamente, comprobar errores.txt\e[0m"
                echo
-               read -p "Enter para continuar..."
+               echo -n -e "\e[1;34mEnter para continuar...\e[0m"
              fi
            else
              clear
-             echo "El comando (tar -xvf) no se ha realizado correctamente, comprobar errores.txt"
+             echo -e "\e[1;31mEl comando (tar -xvf) no se ha realizado correctamente, comprobar errores.txt\e[0m"
              echo
-             read -p "Enter para continuar..."
+             echo -n -e "\e[1;34mEnter para continuar...\e[0m"
            fi
          else
            clear
-           echo "El comando wget NO se ha realizado correctamente, comprobar errores.txt"
+           echo -e "\e[1;31mEl comando wget NO se ha realizado correctamente, comprobar errores.txt\e[0m"
            echo
-           read -p "Enter para continuar..."
+           echo -n -e "\e[1;34mEnter para continuar...\e[0m"
          fi
        fi
       ;;
@@ -203,11 +210,11 @@ while [[ $boleana -eq 0 ]]; do
                 sleep 1.5
                 sudo passwd pi >>
                 if [ $? -eq 0 ]; then
-                  echo "La contraseña ha sido cambiada correctamente"
+                  echo -e "\e[1;32mLa contraseña ha sido cambiada correctamente\e[0m"
                 else
-                  echo "Ha ocurido algún error, revisar el archivo errores.txt"
+                  echo -e "\e[1;31mHa ocurrido algún error, revisar el archivo errores.txt\e[0m"
                   echo
-                  read -p "Enter para continuar..."
+                  echo -n -e "\e[1;34mEnter para continuar...\e[0m\e[0m"
                 fi
                 continue;;
 
@@ -223,28 +230,28 @@ while [[ $boleana -eq 0 ]]; do
                 sudo -k apt-get install fail2ban >> errores.txt
                 if [ $? -eq 0 ]; then
                   clear
-                  echo "Fail2Ban se ha instalado correctamente"
+                  echo -e "\e[1;32mFail2Ban se ha instalado correctamente\e[0m"
                   clear
                   sudo -k apt-get install sendmail >> errores.txt
                   if [ $? -eq 0 ]; then
                     clear
-                    echo "Sendmail se ha instalado correctamente"
+                    echo -e "\e[1;32mSendmail se ha instalado correctamente\e[0m"
                     sleep 1.5
                     clear
-                    echo "¿A que email quiere recibir los avisos?: "
+                    echo -n "¿A que email quiere recibir los avisos?: "
                     read email
                     $email
                     sed 's/root@localhost/'$email'/g' auxiliar.txt > jail.conf
                     mv jail.conf /etc/fail2ban/
                   else
-                    echo "Ha ocurido algún error, revisar el archivo errores.txt"
+                    echo -e "\e[1;31mHa ocurrido algún error, revisar el archivo errores.txt\e[0m"
                     echo
-                    read -p "Enter para continuar..."
+                    echo -n -e "\e[1;34mEnter para continuar...\e[0m"
                   fi
                 else
-                  echo "Ha ocurido algún error, revisar el archivo errores.txt"
+                  echo -e "\e[1;31mHa ocurrido algún error, revisar el archivo errores.txt\e[0m"
                   echo
-                  read -p "Enter para continuar..."
+                  echo -n -e "\e[1;34mEnter para continuar...\e[0m"
                 fi
               ;;
 
@@ -260,37 +267,41 @@ while [[ $boleana -eq 0 ]]; do
       sleep 1.5
       sudo -k apt-get install samba samba-common python-glade2 system-config-samba >> errores.txt
       if [ $? -eq 0 ]; then
-        echo "Samba se ha instalado correctamente"
+        echo -e "\e[1;32mSamba se ha instalado correctamente\e[0m"
         sleep 1.5
         echo "Instalando Apache..."
         sleep 1.5
         sudo -k apt-get install apache2 >> errores.txt
         if [ $? -eq 0 ]; then
           clear
-          echo "Apache se ha instalado correctamente"
-          read -p "Enter para continuar..."
+          echo -e "\e[1;32mApache se ha instalado correctamente\e[0m"
+          echo
+          echo -n -e "\e[1;34mEnter para continuar...\e[0m"
           clear
           echo "Instalando php..."
           sudo -k apt-get install php5-common libapache2-mod-php5 php5-cli >> errores.txt
           if [ $? -eq 0 ]; then
             clear
-            echo "Php se ha instalado correctamente"
+            echo -e "\e[1;32mPhp se ha instalado correctamente\e[0m"
             sleep 1.5
             clear
-            echo "Ya se pueden iniciar los servicios"
+            echo -e "\e[1;32mYa se pueden iniciar los servicios\e[0m"
             sleep 1.5
           else
-            echo "Ha ocurido algún error, revisar el archivo errores.txt"
-            read -p "Enter para continuar..."
+            echo -e "\e[1;31mHa ocurrido algún error, revisar el archivo errores.txt\e[0m"
+            echo
+            echo -n -e "\e[1;34mEnter para continuar...\e[0m"
           fi
         else
-          echo "Ha ocurido algún error, revisar el archivo errores.txt"
-          read -p "Enter para continuar..."
+          echo -e "\e[1;31mHa ocurrido algún error, revisar el archivo errores.txt\e[0m"
+          echo
+          echo -n -e "\e[1;34mEnter para continuar...\e[0m"
         fi
         clear
       else
-        echo "Ha ocurido algún error, revisar el archivo errores.txt"
-        read -p "Enter para continuar..."
+        echo -e "\e[1;31mHa ocurrido algún error, revisar el archivo errores.txt\e[0m"
+        echo
+        echo -n -e "\e[1;34mEnter para continuar...\e[0m"
       fi
       continue;;
 
