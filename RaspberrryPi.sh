@@ -233,11 +233,9 @@ while [[ $boleana -eq 0 ]]; do
                     clear
                     echo "¿A que email quiere recibir los avisos?: "
                     read email
-                    #¿Comprobación email?
-                    #$email
-                    #Mover los archivos y reiniciar los servicios
-                    #cat prueba.txt | sed 's/root@localhost/fvaleroc98@gmail.com/g' > auxiliar.txt
-                    #Mover los archivos y reiniciar los servicios
+                    $email
+                    sed 's/root@localhost/'$email'/g' auxiliar.txt > jail.conf
+                    mv jail.conf /etc/fail2ban/
                   else
                     echo "Ha ocurido algún error, revisar el archivo errores.txt"
                     echo
@@ -268,7 +266,23 @@ while [[ $boleana -eq 0 ]]; do
         sleep 1.5
         sudo -k apt-get install apache2 >> errores.txt
         if [ $? -eq 0 ]; then
+          clear
           echo "Apache se ha instalado correctamente"
+          read -p "Enter para continuar..."
+          clear
+          echo "Instalando php..."
+          sudo -k apt-get install php5-common libapache2-mod-php5 php5-cli >> errores.txt
+          if [ $? -eq 0 ]; then
+            clear
+            echo "Php se ha instalado correctamente"
+            sleep 1.5
+            clear
+            echo "Ya se pueden iniciar los servicios"
+            sleep 1.5
+          else
+            echo "Ha ocurido algún error, revisar el archivo errores.txt"
+            read -p "Enter para continuar..."
+          fi
         else
           echo "Ha ocurido algún error, revisar el archivo errores.txt"
           read -p "Enter para continuar..."
