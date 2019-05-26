@@ -300,8 +300,4 @@ while [[ $boleana -eq 0 ]]; do
        sleep 1.5
       booleana=1
   esac
-  #
-  if [ $? -eq 0 ]; then
-  fi
-  #
 done
