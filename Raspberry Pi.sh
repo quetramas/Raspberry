@@ -104,7 +104,7 @@ while [[ $boleana -eq 0 ]]; do
            sleep 1.5
            clear
            echo "Desccomrpimiento y desempaquetando el paquete"
-           tar -xvf suricata-4.1.4.tar.gz >>
+           sudo tar -xvf suricata-4.1.4.tar.gz >> errores.txt
            if [ $? -eq 0 ]; then
              clear
              echo -e "\e[1;32mSe ha descomprimido y desempaquetado correctamente\e[0m"
