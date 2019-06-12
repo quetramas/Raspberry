@@ -4,8 +4,8 @@ while [[ $boleana -eq 0 ]]; do
   echo "        __^__                                      __^__  "
   echo "       ( ___ )------------------------------------( ___ ) "
   echo -e "        | / |             \e[1;32m\e[5m¿Qué tramas?\e[25m\e[0m             | \ |"
-  echo "        | / |                                          | \ |  "
-  echo -e "        |___|   \e[5m Instalación automática \e[25m    |___|"
+  echo "        | / |                                      | \ |  "
+  echo -e "        |___|   \e[5m Instalación automática \e[25m        |___|"
   echo "       (_____)------------------------------------(_____) "
   echo
   echo -e "1.- Persistencia de conexion ssh"
