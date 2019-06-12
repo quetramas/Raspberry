@@ -24,7 +24,7 @@ while [[ $boleana -eq 0 ]]; do
   echo
   echo -e -n "Elige una opcion: "
   read opcion
-  case opcion in
+  case $opcion in
     1) clear
        sleep 1.5
        echo "Realizando persistencia de SSH"
@@ -35,8 +35,8 @@ while [[ $boleana -eq 0 ]]; do
          echo -e "\e[1;31mHa ocurrido algún error, comprobar el archivo errores.txt\e[0m"
          echo
          echo -n -e "\e[1;34mEnter para continuar...\e[0m"
+         read -p ""
        fi
-       #Comprobar
       continue;;
 
     2) clear
@@ -80,12 +80,14 @@ while [[ $boleana -eq 0 ]]; do
            echo -e "\e[1;31mHa ocurrido algún error, comprobar errores.txt\e[0m"
            echo
            echo -n -e "\e[1;34mEnter para continuar...\e[0m"
+           read -p ""
          fi
        else
          clear
          echo -e "\e[1;31mHa ocurrido algún error, comprobar errores.txt\e[0m"
          echo
          echo -n -e "\e[1;34mEnter para continuar...\e[0m"
+         read -p ""
          sleep 1.5
        fi
        clear
@@ -143,42 +145,49 @@ while [[ $boleana -eq 0 ]]; do
                        echo -e "\e[1;31mHa ocurrido algun error, comprobar errores.txt\e[0m"
                        echo
                        echo -n -e "\e[1;34mEnter para continuar...\e[0m"
+                       read -p ""
                      fi
                    else
                      clear
                      echo -e "\e[1;31mHa ocurrido algun error, comprobar errores.txt\e[0m"
                      echo
                      echo -n -e "\e[1;34mEnter para continuar...\e[0m"
+                     read -p ""
                    fi
                  else
                    clear
                    echo -e "\e[1;31mHa ocurrido algun error, comprobar errores.txt\e[0m"
                    echo
                    echo -n -e "\e[1;34mEnter para continuar...\e[0m"
+                   read -p ""
                  fi
                else
                  clear
                  echo -e "\e[1;31mNo se ha completado correctamente, comprobar errores.txt\e[0m"
                  echo
                  echo -n -e "\e[1;34mEnter para continuar...\e[0m"
+                 read -p ""
                fi
              else
                clear
                echo -e "\e[1;31mNo se ha configurado correctamente, comprobar errores.txt\e[0m"
                echo
                echo -n -e "\e[1;34mEnter para continuar...\e[0m"
+               read -p ""
              fi
            else
              clear
              echo -e "\e[1;31mEl comando (tar -xvf) no se ha realizado correctamente, comprobar errores.txt\e[0m"
              echo
              echo -n -e "\e[1;34mEnter para continuar...\e[0m"
+             read -p ""
            fi
          else
            clear
            echo -e "\e[1;31mEl comando wget NO se ha realizado correctamente, comprobar errores.txt\e[0m"
            echo
            echo -n -e "\e[1;34mEnter para continuar...\e[0m"
+           read -p ""
          fi
        fi
       ;;
@@ -203,8 +212,9 @@ while [[ $boleana -eq 0 ]]; do
           echo
           echo "4.- Salir"
           echo
+          echo -n "Elige una opcion: "
           read option
-          case option in
+          case $option in
               1)clear
                 echo "cambiando contraseña del usuario pi..."
                 sleep 1.5
@@ -215,6 +225,7 @@ while [[ $boleana -eq 0 ]]; do
                   echo -e "\e[1;31mHa ocurrido algún error, revisar el archivo errores.txt\e[0m"
                   echo
                   echo -n -e "\e[1;34mEnter para continuar...\e[0m\e[0m"
+                  read -p ""
                 fi
                 continue;;
 
@@ -243,16 +254,17 @@ while [[ $boleana -eq 0 ]]; do
                     $email
                     sed 's/root@localhost/'$email'/g' auxiliar.txt > jail.conf
                     mv jail.conf /etc/fail2ban/
-                    ##Revisar
                   else
                     echo -e "\e[1;31mHa ocurrido algún error, revisar el archivo errores.txt\e[0m"
                     echo
                     echo -n -e "\e[1;34mEnter para continuar...\e[0m"
+                    read -p ""
                   fi
                 else
                   echo -e "\e[1;31mHa ocurrido algún error, revisar el archivo errores.txt\e[0m"
                   echo
                   echo -n -e "\e[1;34mEnter para continuar...\e[0m"
+                  read -p ""
                 fi
                   continue;;
 
@@ -279,6 +291,7 @@ while [[ $boleana -eq 0 ]]; do
           echo -e "\e[1;32mApache se ha instalado correctamente\e[0m"
           echo
           echo -n -e "\e[1;34mEnter para continuar...\e[0m"
+          read -p ""
           clear
           echo "Instalando php..."
           sudo -k apt-get install php5-common libapache2-mod-php5 php5-cli >> errores.txt
@@ -294,12 +307,14 @@ while [[ $boleana -eq 0 ]]; do
             echo -e "\e[1;31mHa ocurrido algún error, revisar el archivo errores.txt\e[0m"
             echo
             echo -n -e "\e[1;34mEnter para continuar...\e[0m"
+            read -p ""
           fi
         else
           clear
           echo -e "\e[1;31mHa ocurrido algún error, revisar el archivo errores.txt\e[0m"
           echo
           echo -n -e "\e[1;34mEnter para continuar...\e[0m"
+          read -p ""
         fi
         clear
       else
@@ -307,6 +322,7 @@ while [[ $boleana -eq 0 ]]; do
         echo -e "\e[1;31mHa ocurrido algún error, revisar el archivo errores.txt\e[0m"
         echo
         echo -n -e "\e[1;34mEnter para continuar...\e[0m"
+        read -p ""
       fi
       continue;;
 
