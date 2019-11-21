@@ -4,7 +4,7 @@ Que Tramas Script
 https://quetramasblog.com/
 
 
-Hemos creado este script para poder instalar y configurar estas herramientas en Raspbian además de poder realizar cambios en la Raspberry pi
+Hemos creado este script para poder instalar y configurar estas herramientas en Raspbian además de poder realizar cambios en la Raspberry pi.
 
 - Persistencia de conexión ssh
 - PiHole
