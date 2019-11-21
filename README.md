@@ -26,7 +26,7 @@ We created that script to doing changes in Raspbian also we can install and make
   - Install and configure fail2ban y sendmail
   
   
-Ejecucion Execution
+Ejecución Execution
 ====================
 
 - cd Raspberry
